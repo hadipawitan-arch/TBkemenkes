@@ -1,0 +1,25 @@
+README
+
+Pangenome Mycobacterium tuberculosis
+
+Sampel yang digunakan - 
+GCA_002116775.1 - Strain Beijing-like/36918
+GCF_002116835.1 - Strain Beijing-like/50148
+TP00222 - dirakit menggunakan Megahit menggunakan parameter bawaan
+TP00351 - dirakit menggunakan Megahit menggunakan parameter bawaan
+TP00355 - dirakit menggunakan Megahit menggunakan parameter bawaan
+TP00310 - dirakit menggunakan Megahit menggunakan parameter bawaan
+TP00488 - dirakit menggunakan Megahit menggunakan parameter bawaan
+
+Program yang digunakan - 
+Prokka 		- anotasi genom
+NCBI-dataset 	- download data genom
+roary		- analisis pangenom [Tidak digunakan hari ini]
+PGAP2 		- analisis pangenom
+get_homologues 	- analisis pangenom
+
+
+Script yang tersedia -
+prokka.sh			- Mohon diubah terlebih dahulu menggunakan nano
+instalasi_get_homologues.sh	- Mohon diubah terlebih dahulu menggunakan nano
+get_homologues.sh		- Mohon diubah terlebih dahulu menggunakan nano
