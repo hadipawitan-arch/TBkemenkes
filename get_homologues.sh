@@ -12,16 +12,16 @@ set -e
 TOOL_DIR="$HOME/miniconda3/envs/get_homologues/bin"
 
 # Path to your .gbk or .gff files
-INPUT_DIR="annotation/gbk"
+read -p "Contoh /home/hadi/annotation/gbk/ | Masukkan nama direktori input " INPUT_DIR
 
 # Main output directory that get_homologues will create
-BASE_OUTPUT_DIR="gbk_homologues"
+BASE_OUTPUT_DIR="H37rv"
 
 # Get the base name of the input dir (e.g., 'gbk') for file naming
-INPUT_PREFIX=$(basename $INPUT_DIR)
+INPUT_PREFIX=H37rv
 
 # Number of CPU threads to use
-THREADS=8
+read -p "Enter number of threads to use: " THREADS
 
 echo "--- Pan-Genome Tutorial Started ---"
 echo "Input Directory: $INPUT_DIR"
@@ -62,31 +62,31 @@ $BASE_OUTPUT_DIR/${INPUT_PREFIX}_f0_alltaxa_algBDBH_e0_
 
 # --- 5. CALCULATE CORE-GENOME (TETTELIN-STYLE) ---
 echo "LANGKAH 5: Menghitung core-genome (50% Cov, 50% ID)..."
-$TOOL_DIR/get_homologues.pl -d $INPUT_DIR -M -C 50 -S 50 -n $THREADS -X
+$TOOL_DIR/get_homologues.pl -d $INPUT_DIR -M -C 80 -S 80 -n $THREADS 
 
 # --- 6. CALCULATE CORE INTERGENIC CLUSTERS ---
 echo "LANGKAH 6: Menghitung core intergenic clusters..."
-$TOOL_DIR/get_homologues.pl -d $INPUT_DIR -g -n $THREADS -X
+$TOOL_DIR/get_homologues.pl -d $INPUT_DIR -g -n $THREADS 
 
 
 # --- 7. ESTIMATE CORE & PAN-GENOME SIZES (FOR PLOTTING) ---
-echo "LANGKAH 7.1: Estimating sizes (BDBH)..."
-$TOOL_DIR/get_homologues.pl -d $INPUT_DIR -c -n $THREADS -X
+echo "LANGKAH 7.1: Estimating sizes (BDBH)...
+$TOOL_DIR/get_homologues.pl -d $INPUT_DIR -c -n $THREADS 
 
 echo "LANGKAH 7.2: Estimating sizes (OMCL)..."
-$TOOL_DIR/get_homologues.pl -d $INPUT_DIR -M -c -n $THREADS -X
+$TOOL_DIR/get_homologues.pl -d $INPUT_DIR -M -c -n $THREADS 
 
 echo "LANGKAH 7.3: Estimating sizes (COG)..."
-$TOOL_DIR/get_homologues.pl -d $INPUT_DIR -G -c -n $THREADS -X
+$TOOL_DIR/get_homologues.pl -d $INPUT_DIR -G -c -n $THREADS 
 
 
 # --- 8. CALCULATE FULL PAN-GENOME (t=0) & AAI ---
 # We add the -A flag to the OMCL run to generate the AAI matrix.
 echo "LANGKAH 8.1: Menghitung full pan-genome (OMCL, t=0) and AAI Matrix..."
-$TOOL_DIR/get_homologues.pl -d $INPUT_DIR -M -t 0 -A -n $THREADS -X
+$TOOL_DIR/get_homologues.pl -d $INPUT_DIR -M -t 0 -A -a 'CDS' -n $THREADS
 
 echo "LANGKAH 8.2: Menghitung full pan-genome (COG, t=0)..."
-$TOOL_DIR/get_homologues.pl -d $INPUT_DIR -G -t 0 -n $THREADS -X
+$TOOL_DIR/get_homologues.pl -d $INPUT_DIR -G -t 0 -n $THREADS 
 
 
 # --- 9. BUILD CONSENSUS PAN-GENOME MATRIX & TREE ---
